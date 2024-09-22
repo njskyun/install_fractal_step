@@ -1,0 +1,98 @@
+系统配置：
+ubuntu 22 
+cpu 8G （最好别小于4G）
+内存 16G （最好别小于8G）
+硬盘 500G
+
+
+1 .安装node以及后续需要用到的软件，一行一个运行
+sudo apt update
+sudo apt install libssl-dev pkg-config
+sudo apt-get install pkg-config libssl-dev build-essential
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"   
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+nvm install 20
+npm i -g yarn
+
+2 .安装分型全节点
+wget https://github.com/fractal-bitcoin/fractald-release/releases/download/v0.2.1/fractald-0.2.1-x86_64-linux-gnu.tar.gz
+tar -zxvf fractald-0.2.1-x86_64-linux-gnu.tar.gz
+cd fractald-0.2.1-x86_64-linux-gnu
+mkdir data
+cp ./bitcoin.conf ./data
+vim ./data/bitcoin.conf
+txindex=1
+rpcuser=btc
+rpcpassword=btc
+
+mkdir  ~/.bitcoin/
+cp ./data/bitcoin.conf  ~/.bitcoin/
+./bin/bitcoind -datadir=/root/fractald-0.2.1-x86_64-linux-gnu/data/ -maxtipage=504576000
+
+返回出去：ctrl+a+d
+
+
+
+3 .安装postgres
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo -i -u postgres
+psql
+CREATE DATABASE postgres;
+CREATE USER postgres WITH PASSWORD 'postgres';
+GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;
+ALTER USER postgres WITH PASSWORD 'postgres';
+\q
+
+切回root：
+su root
+输入root密码
+
+
+4. 安装cat索引器
+screen -S cat
+git clone https://github.com/CATProtocol/cat-token-box.git
+cd cat-token-box
+yarn install && yarn build
+cd packages/tracker/
+vi .env
+修改
+DATABASE_TYPE=postgres
+DATABASE_HOST=127.0.0.1
+DATABASE_PORT=5432
+DATABASE_DB=postgres
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=postgres
+
+RPC_HOST=127.0.0.1
+RPC_PORT=8332
+RPC_USER=btc
+RPC_PASSWORD=btc
+
+NETWORK=mainnet
+API_PORT=3000
+GENESIS_BLOCK_HEIGHT=0 # 可以不从0开始同步，想打什么币，就填币的部署区块号，节省同步时间
+
+yarn run start:prod
+
+返回出去：ctrl+a+d
+
+
+5. 安装 fractal ord索引器部署教程： 
+screen -S ord
+cd /root
+git clone https://github.com/fractal-bitcoin/ord.git
+cd ord 
+编译
+cargo build --release
+运行服务
+/root/ord/target/release/ord --bitcoin-rpc-username btc --bitcoin-rpc-password btc  --chain=fractal-mainnet  server 
+
+返回出去：ctrl+a+d
+
+
