@@ -19,6 +19,7 @@ nvm install 20
 npm i -g yarn
 
 2 .安装分型全节点
+新建个会话窗口： screen -S btc
 wget https://github.com/fractal-bitcoin/fractald-release/releases/download/v0.2.1/fractald-0.2.1-x86_64-linux-gnu.tar.gz
 tar -zxvf fractald-0.2.1-x86_64-linux-gnu.tar.gz
 cd fractald-0.2.1-x86_64-linux-gnu
@@ -34,6 +35,7 @@ cp ./data/bitcoin.conf  ~/.bitcoin/
 ./bin/bitcoind -datadir=/root/fractald-0.2.1-x86_64-linux-gnu/data/ -maxtipage=504576000
 
 返回出去：ctrl+a+d
+重新进入回话：screen -r btc
 
 
 
@@ -81,7 +83,7 @@ GENESIS_BLOCK_HEIGHT=0 # 可以不从0开始同步，想打什么币，就填币
 yarn run start:prod
 
 返回出去：ctrl+a+d
-
+重新进入回话：screen -r cat
 
 5. 安装 fractal ord索引器部署教程： 
 screen -S ord
@@ -94,5 +96,6 @@ cargo build --release
 /root/ord/target/release/ord --bitcoin-rpc-username btc --bitcoin-rpc-password btc  --chain=fractal-mainnet  server 
 
 返回出去：ctrl+a+d
+重新进入回话：screen -r ord
 
 
