@@ -4,7 +4,7 @@
  Source Server         : cat2
  Source Server Type    : PostgreSQL
  Source Server Version : 160004 (160004)
- Source Host           : 64.32.27.112:5432
+ Source Host           : 
  Source Catalog        : postgres
  Source Schema         : public
 
