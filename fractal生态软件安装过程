@@ -58,8 +58,9 @@ su root
 
 4. 安装cat索引器
 screen -S cat
-git clone https://github.com/CATProtocol/cat-token-box.git
+git clone git clone https://github.com/njskyun/cat-token-box.git
 cd cat-token-box
+git checkout catapp
 yarn install && yarn build
 cd packages/tracker/
 vi .env
