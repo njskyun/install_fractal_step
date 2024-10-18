@@ -1,0 +1,24 @@
+cd ~
+git clone https://github.com/CounterpartyXCP/counterparty-core.git
+git pull
+mkdir -p ~/.local/share/counterparty-docker-data
+cd ~/counterparty-core
+
+修改全节点端口号，默认是8332，如果已经被使用了，就得修改成其他的：
+vi  docker-compose.yml
+
+安装docker
+sudo apt update
+sudo apt install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+启动服务
+docker-compose --profile mainnet up -d
+
+查看三个服务运行情况
+docker-compose --profile mainnet logs --tail=10 -f bitcoind 
+docker-compose --profile mainnet logs --tail=10 -f addrindexrs
+docker-compose --profile mainnet logs --tail=10 -f counterparty-core
+ 
