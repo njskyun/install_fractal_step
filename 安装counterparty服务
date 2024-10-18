@@ -3,9 +3,7 @@ git clone https://github.com/CounterpartyXCP/counterparty-core.git
 git pull
 mkdir -p ~/.local/share/counterparty-docker-data
 cd ~/counterparty-core
-
-修改全节点端口号，默认是8332，如果已经被使用了，就得修改成其他的：
-vi  docker-compose.yml
+ 
 
 安装docker
 sudo apt update
