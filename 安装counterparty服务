@@ -16,10 +16,23 @@ sudo chmod +x /usr/local/bin/docker-compose
 启动服务
 docker-compose --profile mainnet up -d
 
-## 查看三个服务运行情况
+## 
+查看三个服务运行情况
 docker-compose --profile mainnet logs --tail=10 -f bitcoind 
 docker-compose --profile mainnet logs --tail=10 -f addrindexrs
 docker-compose --profile mainnet logs --tail=10 -f counterparty-core
+停止服务
+docker-compose stop bitcoind 
+docker-compose stop addrindexrs
+docker-compose stop counterparty-core
+删除服务
+docker-compose rm bitcoind 
+docker-compose rm addrindexrs
+docker-compose rm counterparty-core
+重新启动服务
+docker-compose --profile mainnet up -d bitcoind 
+docker-compose --profile mainnet up -d addrindexrs
+docker-compose --profile mainnet up -d counterparty-core
 
 
 ## 铸造：
