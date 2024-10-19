@@ -20,3 +20,6 @@ docker-compose --profile mainnet logs --tail=10 -f bitcoind
 docker-compose --profile mainnet logs --tail=10 -f addrindexrs
 docker-compose --profile mainnet logs --tail=10 -f counterparty-core
 
+
+铸造：
+curl http://127.0.0.1:4000/v2/addresses/地址/compose/fairmint?asset=MINTS&quantity=1000&allow_unconfirmed_inputs=true&exact_fee=5000（这是矿工费）
