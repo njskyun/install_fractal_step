@@ -1,3 +1,4 @@
+## 下载counterparty
 cd ~
 git clone https://github.com/CounterpartyXCP/counterparty-core.git
 git pull
@@ -5,7 +6,7 @@ mkdir -p ~/.local/share/counterparty-docker-data
 cd ~/counterparty-core
  
 
-安装docker
+## 安装docker
 sudo apt update
 sudo apt install docker.io
 sudo systemctl start docker
@@ -15,15 +16,15 @@ sudo chmod +x /usr/local/bin/docker-compose
 启动服务
 docker-compose --profile mainnet up -d
 
-查看三个服务运行情况
+## 查看三个服务运行情况
 docker-compose --profile mainnet logs --tail=10 -f bitcoind 
 docker-compose --profile mainnet logs --tail=10 -f addrindexrs
 docker-compose --profile mainnet logs --tail=10 -f counterparty-core
 
 
-铸造：
+## 铸造：
 curl http://127.0.0.1:4000/v2/addresses/地址/compose/fairmint?asset=MINTS&quantity=1000&allow_unconfirmed_inputs=true&exact_fee=5000（这是矿工费）
 将返回的数据拿去freewallet钱包去签名并广播
 
-freewallet下载地址
+## freewallet下载地址
 https://github.com/jdogresorg/freewallet-desktop/releases/tag/v0.9.36
