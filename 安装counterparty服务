@@ -28,3 +28,6 @@ curl http://127.0.0.1:4000/v2/addresses/地址/compose/fairmint?asset=MINTS&quan
 
 ## freewallet下载地址
 https://github.com/jdogresorg/freewallet-desktop/releases/tag/v0.9.36
+
+示例图
+https://github.com/njskyun/install_fractal_step/blob/main/freewallet.jpg
