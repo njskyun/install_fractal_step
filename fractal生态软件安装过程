@@ -29,6 +29,11 @@ vim ./data/bitcoin.conf
 txindex=1
 rpcuser=btc
 rpcpassword=btc
+允许远程链接设置下面两个
+rpcbind=0.0.0.0
+rpcallowip=0.0.0.0/0
+设置成其他的开发端口修改，默认是8332
+rpcport=8332
 
 mkdir  ~/.bitcoin/
 cp ./data/bitcoin.conf  ~/.bitcoin/
