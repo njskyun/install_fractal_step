@@ -17,19 +17,16 @@ def compose_fairmint(address, asset, quantity, exact_fee):
         data = response.json()
 
         # 检查是否有错误信息
-        if "error" in data:
-            print(f"等待重试，勿关闭: {data['error']}") 
-            return None 
+        if "error" in data: 
+            return False, data
         else:
             rawtransaction = data["result"]["rawtransaction"]
-            return rawtransaction
+            return True, rawtransaction
 
-    except requests.exceptions.RequestException as e: 
-        print(f"等待重试，勿关闭: {e}") 
-        return None
-    except ValueError as ve:
-        print(f"等待重试，勿关闭: {ve}") 
-        return None
+    except requests.exceptions.RequestException as e:  
+        return False, f"等待重试1，勿关闭: {e}"
+    except ValueError as ve: 
+        return False, f"等待重试2，勿关闭: {ve}"
 
  
  
@@ -64,19 +61,20 @@ def broadcast_transaction(signed_transaction, rpc_user, rpc_pass):
         result = response.json()
         
         if 'error' in result and result['error'] is not None:
-            return f"广播错误: {result['error']}"
-        return f"广播成功: {result['result']}"
+            return False, f"广播错误: {result['error']}"
+
+        return True, f"广播成功: {result['result']}"
 
     except requests.exceptions.RequestException as e:
-        return f"请求异常: {e}"
+        return False, f"请求异常: {e}"
     except ValueError as ve:
-        return f"解析 JSON 失败: {ve}"
+        return False, f"解析 JSON 失败: {ve}"
     
     
 
 if __name__ == "__main__":
     #################################################   修改下面值   ############################################## 
-    private_key = "私钥" # 你的WIF格式私钥
+    private_key = "" # 你的WIF格式私钥
      
     asset = "XCPTWO"    # 打的币名
     quantity = 100      # 单次mint数量 
@@ -96,20 +94,23 @@ if __name__ == "__main__":
     count = 0 
     while True:
         print(f"第 {count + 1} 张")
-        count += 1
+        
         if count >= mintNum:
-            break   
+            break  # 达到 N 次后退出循环
         
         while True :
-            rawtransaction = compose_fairmint(address, asset, quantity, exact_fee)
-            if rawtransaction is not None :
+            ret, rawtransaction = compose_fairmint(address, asset, quantity, exact_fee)
+            if ret :
                 break
             else :
-                time.sleep(2)
+                print(rawtransaction)
+                time.sleep(3)
             
-        if rawtransaction is not None: 
+        if ret : 
             signed_transaction = sign_transaction(rawtransaction, private_key)
-            res = broadcast_transaction(signed_transaction, rpc_user, rpc_pass)
+            ret, res = broadcast_transaction(signed_transaction, rpc_user, rpc_pass)
+            if ret : 
+                count += 1
             print(res)
         else:
             print("获取的 rawtransaction 无效或为空")
