@@ -96,7 +96,7 @@ if __name__ == "__main__":
         print(f"第 {count + 1} 张")
         
         if count >= mintNum:
-            break  # 达到 N 次后退出循环
+            break  # 达到 mint 次后退出循环
         
         while True :
             ret, rawtransaction = compose_fairmint(address, asset, quantity, exact_fee)
