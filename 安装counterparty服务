@@ -16,7 +16,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 启动服务
 docker-compose --profile mainnet up -d
 
-## 
 刚才上面安装了三个服务，等待他们同步完环境就算搭建好了，查看三个服务同步运行情况
 全节点： docker-compose --profile mainnet logs --tail=10 -f bitcoind 
 addrindexrs服务： docker-compose --profile mainnet logs --tail=10 -f addrindexrs
@@ -41,6 +40,7 @@ apt-get install libgmp-dev
 apt install python3-pip 
 pip install bitcoinlib
 wget https://github.com/njskyun/install_fractal_step/blob/main/mint.py
+打开mint.py文件，拉到最后配置私钥，币种等信息
 开始铸造： python3 mint.py
 
 
