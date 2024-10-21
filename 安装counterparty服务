@@ -38,8 +38,8 @@ docker-compose --profile mainnet up -d counterparty-core
 apt-get update
 apt-get install libgmp-dev
 apt install python3-pip 
-pip install bitcoinlib
-wget https://github.com/njskyun/install_fractal_step/blob/main/mint.py
+pip install bitcoin
+访问： https://github.com/njskyun/install_fractal_step/blob/main/mint.py ，新建一个mint.py文件，把代码copy进去
 打开mint.py文件，拉到最后配置私钥，币种等信息
 开始铸造： python3 mint.py
 
