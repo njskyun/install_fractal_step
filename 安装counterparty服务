@@ -36,6 +36,11 @@ docker-compose --profile mainnet up -d addrindexrs
 docker-compose --profile mainnet up -d counterparty-core
 
 
+apt-get update
+apt-get install libgmp-dev
+apt install python3-pip 
+pip install bitcoinlib
+
 ## 铸造：
 curl http://127.0.0.1:4000/v2/addresses/地址/compose/fairmint?asset=MINTS&quantity=1000&allow_unconfirmed_inputs=true&exact_fee=5000（这是矿工费）
 将返回的数据拿去freewallet钱包去签名并广播
