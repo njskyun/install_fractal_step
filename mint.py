@@ -24,7 +24,7 @@ def compose_fairmint(address, asset, quantity, exact_fee):
             return True, rawtransaction
 
     except requests.exceptions.RequestException as e:  
-        return False, f"等待重试1，勿关闭: {e}"
+        return False, f"等待重试1，余额不足或数据同步中"
     except ValueError as ve: 
         return False, f"等待重试2，勿关闭: {ve}"
 
@@ -75,7 +75,7 @@ def broadcast_transaction(signed_transaction, rpc_user, rpc_pass):
 if __name__ == "__main__":
     #################################################   修改下面值   ############################################## 
     private_key = "" # 你的WIF格式私钥
-     
+    
     asset = "XCPTWO"    # 打的币名
     quantity = 100      # 单次mint数量 
     gas_fee = 5         # 矿工费用. 整数
