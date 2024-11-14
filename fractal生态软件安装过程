@@ -21,6 +21,7 @@ npm i -g yarn
 2 .安装分型全节点
 新建个会话窗口： screen -S btc
 wget https://github.com/fractal-bitcoin/fractald-release/releases/download/v0.2.1/fractald-0.2.1-x86_64-linux-gnu.tar.gz
+（如果是安装btc全节点：wget  https://bitcoincore.org/bin/bitcoin-core-28.0/bitcoin-28.0-x86_64-linux-gnu.tar.gz）
 tar -zxvf fractald-0.2.1-x86_64-linux-gnu.tar.gz
 cd fractald-0.2.1-x86_64-linux-gnu
 mkdir data
